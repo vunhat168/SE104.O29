@@ -1,0 +1,68 @@
+<h1 class="mt-3">
+  Danh sách tài khoản
+</h1>
+<a href="/admin/createAccount" class="btn btn-primary active" role="button" aria-pressed="true">Thêm tài khoản quản lí</a>
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Họ tên</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mật khẩu</th>
+      <th scope="col">Vai trò</th>
+      <th></th>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.password}}</td>
+      <td>{{this.role}}</td>
+      <td>{{#if (isSelect this.role 'manager')}}<a href="" data-toggle="modal" data-target="#deleteAccount" data-userid="{{this._id}}">Xóa tài khoản</a>{{/if}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{!-- Delete confirm --}}
+<div class="modal fade" id="deleteAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có xác nhận xoá tài khoản này
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button id="btn-delete" type="button" class="btn btn-primary">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="deleteForm" method="POST" ></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var userId;
+    var deleteForm = document.getElementById('deleteForm')
+
+     $('#deleteAccount').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      userId = button.data('userid')
+    })
+
+    var deleteButton = document.getElementById('btn-delete')
+    deleteButton.onclick = function() {
+      deleteForm.action = '/admin/deleteAccount/' + userId + '?_method=DELETE';
+      deleteForm.submit();
+    }
+  })
+</script>

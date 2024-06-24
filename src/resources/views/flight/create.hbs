@@ -1,0 +1,104 @@
+<section class="container">
+    <header>Thêm chuyến bay</header>
+    <form action="/flight/create" method="POST" class="form">
+        <div class="column">
+            <div class="input-box">
+            <label>Mã chuyến bay</label>
+            <input type="text" name="flightId" value="{{data.flightId}}" required />
+            </div>
+            <div class="input-box">
+            <label>Giá vé</label>
+            <input type="text" name="price" value="{{data.price}}" required />
+            </div>
+        </div>
+        
+        <div class="input-box address">
+          <div class="column">
+            <div class="select-box">
+                <select name="startAirport" required>
+                    <option value="" hidden>Sân bay đi</option>
+                    {{#each airports}}
+                    <option {{#if (isSelect ../data.startAirport this.name)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="select-box">
+                <select name="endAirport" required>
+                    <option value="" hidden>Sân bay đến</option>
+                    {{#each airports}}
+                    <option {{#if (isSelect ../data.endAirport this.name)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+            <label>Giờ khởi hành</label>
+            <input id="time" type="time" name="time" value="{{data.time}}" required />
+            </div>
+
+            <div class="input-box">
+            <label>Ngày khởi hành</label>
+            <input id="date" type="date" name="date" required value="{{data.date}}" />
+            </div>
+
+            <div class="input-box">
+            <label>Thời gian bay (phút)</label>
+            <input type="number" name="flyTime" value="{{data.flyTime}}" required />
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+            <label>Số lượng ghế hạng 1</label>
+            <input type="number" name="firstSeat" value="{{data.firstSeat}}" required />
+            </div>
+            <div class="input-box">
+            <label>Số lượng ghế hạng 2</label>
+            <input type="number" name="secondSeat" value="{{data.secondSeat}}" required />
+            </div>
+        </div>
+
+        {{#repeat maxMidAirport}}
+        <div class="column">
+            <div class="input-box" style="width: 350px">
+                <label>Sân bay TG {{sum this 1}}</label>
+                <div class="select-box">
+                    <select name="midAirport{{this}}">
+                        <option value="" selected></option>
+                        <option hidden></option>
+                        {{#each ../airports}}
+                        <option {{#if (isSelect ../data.midAirport1 this.name)}}selected{{/if}}>{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box" style="width: 400px">
+                <label>Thời gian dừng (phút)</label>
+                <input type="number" name="stopTime{{this}}" value="{{data.stopTime1}}"/>
+            </div>
+
+            <div class="input-box">
+                <label>Ghi chú</label>
+                <textarea type="text" name="note{{this}}">{{data.note}}</textarea>
+            </div>
+        </div>
+        {{/repeat}}
+        
+        {{#if error}}
+          <div class="error-message" style="color: red;">{{error}}</div>
+        {{/if}}
+        <button>Xác nhận</button>
+    </form>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+    });
+</script>
+

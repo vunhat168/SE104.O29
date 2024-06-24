@@ -1,0 +1,122 @@
+<section class="container">
+    <header>Sủa chuyến bay</header>
+    <form method="POST" action="/flight/{{flight.flightId}}?_method=PUT" class="form">
+        <div class="column">
+            <div class="input-box">
+            <label>Mã chuyến bay</label>
+            <input type="text" name="flightId" value="{{flight.flightId}}" disabled/>
+            </div>
+            <div class="input-box">
+            <label>Giá vé</label>
+            <input type="text" name="price" value="{{flight.price}}" required />
+            </div>
+        </div>
+        
+        <div class="input-box address">
+          <div class="column">
+            <div class="select-box">
+                <select name="startAirport" disabled>
+                    <option>{{flight.startAirport}}</option>
+                </select>
+            </div>
+            <div class="select-box">
+                <select name="endAirport" disabled>
+                    <option>{{flight.endAirport}}</option>
+                </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+            <label>Giờ khởi hành</label>
+            <input id="time" type="time" name="time" value="{{flight.time}}" required />
+            </div>
+
+            <div class="input-box">
+            <label>Ngày khởi hành</label>
+            <input id="date" type="date" name="date" required value="{{flight.date}}" />
+            </div>
+
+            <div class="input-box">
+            <label>Thời gian bay (phút)</label>
+            <input type="number" name="flyTime" value="{{flight.flyTime}}" required />
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+            <label>Số lượng ghế hạng 1</label>
+            <input type="num" name="firstSeat" value="{{flight.firstSeat}}" required />
+            </div>
+            <div class="input-box">
+            <label>Số lượng ghế hạng 2</label>
+            <input type="num" name="secondSeat" value="{{flight.secondSeat}}" required />
+            </div>
+        </div>
+
+        {{!-- <div class="column">
+            <div class="input-box" style="width: 250px">
+                <label>Sân bay TG 1</label>
+                <div class="select-box">
+                    <select name="midAirport1">
+                        <option value="" selected></option>
+                        <option hidden></option>
+                        {{#each airports}}
+                        <option {{#if (isMidAirport ../flight.midAirports 0 this.name)}}selected{{/if}}>{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box" style="width: 250px">
+                <label>Thời gian dừng</label>
+                <input type="num" name="stopTime1" value="{{getStopTime flight 0}}"/>
+            </div>
+
+            <div class="input-box">
+                <label>Ghi chú</label>
+                <textarea type="text" name="note1">{{getNote flight 0}}</textarea>
+            </div>
+        </div> --}}
+
+        {{#repeat maxMidAirport}}
+        <div class="column">
+            <div class="input-box" style="width: 350px">
+                <label>Sân bay TG {{sum this 1}}</label>
+                <div class="select-box">
+                    <select name="midAirport{{this}}">
+                        <option value="" selected></option>
+                        <option hidden></option>
+                        {{#each ../airports}}
+                        <option {{#if (isMidAirport ../../flight.midAirports ../this this.name)}}selected{{/if}}>{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box" style="width: 400px">
+                <label>Thời gian dừng (phút)</label>
+                <input type="number" name="stopTime{{this}}" value="{{getStopTime ../flight this}}"/>
+            </div>
+
+            <div class="input-box">
+                <label>Ghi chú</label>
+                <textarea type="text" name="note{{this}}">{{getNote ../flight this}}</textarea>
+            </div>
+        </div>
+        {{/repeat}}
+        
+        {{#if error}}
+          <div class="error-message" style="color: red;">{{error}}</div>
+        {{/if}}
+        <button>Xác nhận</button>
+    </form>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+    });
+</script>

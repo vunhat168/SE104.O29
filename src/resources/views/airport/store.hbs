@@ -1,0 +1,95 @@
+<h1 class="mt-3">
+  Danh sách sân bay
+</h1>
+
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên sân bay</th>
+      <th scope="col"></th>
+  </thead>
+  <tbody>
+    {{#each airports}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td><a href="" data-toggle="modal" data-target="#deleteAirport" data-name="{{this.name}}">Xóa sân bay</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<button id="addButton" type="button" class="btn btn-primary">Thêm sân bay</button>
+<form action="/airport/store" method="POST" id="addForm" class="form-inline" style="display: none">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="inputPassword2" class="sr-only">Password</label>
+    <input name="name" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+</form>
+
+<script>
+    var addButton = document.getElementById("addButton")
+    var addForm = document.getElementById("addForm");
+    addButton.addEventListener("click", function() {
+        addButton.style.display = "none";
+        addForm.style.display = "flex"; 
+    });
+</script>
+
+{{!-- Delete confirm --}}
+<div class="modal fade" id="deleteAirport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có xác nhận xoá sân bay
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button id="btn-delete" type="button" class="btn btn-primary">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="deleteForm" method="POST" ></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var name;
+    var deleteForm = document.getElementById('deleteForm')
+
+     $('#deleteAirport').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      name = button.data('name')
+    })
+
+    var deleteButton = document.getElementById('btn-delete')
+    deleteButton.onclick = function() {
+      deleteForm.action = '/airport/delete/' + name + '?_method=DELETE';
+      deleteForm.submit();
+    }
+  })
+</script>
+
+{{!-- Cant delete airport alert --}}
+<div id="deleteAirportAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+  <strong>Thông báo!</strong> Không thể xóa sân bay này
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{{#if deleteAirport}}
+<script>
+  var alert = document.getElementById('deleteAirportAlert');
+  alert.removeAttribute('style');
+</script>
+{{/if}}

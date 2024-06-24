@@ -1,0 +1,30 @@
+  <div class="wrapper">
+      <div class="title-text">
+        <div class="title signup">Signup Form</div>
+      </div>
+      <div class="form-container">
+        <div class="form-inner">
+          <form action="" method="POST" class="signup">
+            <div class="field">
+              <input name="name" type="text" placeholder="Full Name" value="{{data.name}}" required>
+            </div>
+            <div class="field">
+              <input name="email" type="text" placeholder="Email Address" value="{{data.email}}" required>
+            </div>
+            <div class="field">
+              <input name="password" type="password" placeholder="Password" value="{{data.password}}" required>
+            </div>
+            <div class="field">
+              <input name="confirmPassword" type="password" placeholder="Confirm password" value="{{data.confirmPassword}}" required>
+            </div>
+            {{#if error}}
+              <div class="error-message" style="color: red;">{{error}}</div>
+            {{/if}}
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Đăng kí">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>

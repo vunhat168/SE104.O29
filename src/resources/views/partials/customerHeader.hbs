@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+  <a href="#" class="navbar-brand font-weight-bold d-block d-lg-none">MegaMenu</a>
+  <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  <div id="navbarContent" class="collapse navbar-collapse">
+    {{#if userLogin}}
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a href="/booking" class="nav-link font-weight-bold text-uppercase">Danh sách chuyến bay</a></li>
+      </ul>
+    {{/if}}
+    <ul class="navbar-nav ml-auto">
+      {{#if userLogin}}
+        <i class="nav-icon fa-solid fa-user"></i>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle font-weight-bold text-uppercase" role="button" data-toggle="dropdown" aria-expanded="false">
+            {{userLogin.name}}
+          </a>
+          <div class="dropdown-menu" style="margin-left: -80px">
+            <a class="dropdown-item text-uppercase" href="/customer/myFlight">Chuyến bay của tôi</a>
+            <div class="dropdown-divider"></div>
+            <a href="/user/logout" class="dropdown-item text-uppercase" data-toggle="modal" data-target="#exampleModal">Đăng xuất</a>
+          </div>
+        </li>
+        {{!-- <li class="nav-item nav-link font-weight-bold text-uppercase">{{userLogin.name}}</li>
+        <li class="nav-item"><a href="../user/logout" class="nav-link font-weight-bold text-uppercase" data-toggle="modal" data-target="#exampleModal">Đăng xuất</a></li> --}}
+      {{else}}
+        <li class="nav-item"><a href="../customer/login" class="nav-link font-weight-bold text-uppercase">Đăng nhập</a></li>
+        <li class="nav-item"><a href="../customer/signup" class="nav-link font-weight-bold text-uppercase">Đăng kí</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+
+<!-- Logout confirm -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Đăng xuất</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có xác nhận đăng xuất khỏi trang
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button id="btn-logout" type="button" class="btn btn-primary">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var logoutButton = document.getElementById('btn-logout');
+  logoutButton.onclick = function () {
+    window.location.href = '../customer/logout';
+  }
+</script>

@@ -1,0 +1,129 @@
+<h1 class="mt-3">
+  Nội dung các quy định
+</h1>
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Quy định</th>
+      <th scope="col">Giá trị</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Thời gian bay tối thiểu</th>
+      <td>{{regulation.minFlyTime}} (giờ)</td>
+      <td>
+        <button id="changeButton1" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm1" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="minFlyTime" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Số sân bay trung gian tối đa</th>
+      <td>{{regulation.maxMidAirport}}</td>
+      <td>
+        <button id="changeButton2" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm2" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="maxMidAirport" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Thời gian dừng tối thiểu tại sân bay trung gian</th>
+      <td>{{regulation.minStopTime}} (phút)</td>
+      <td>
+        <button id="changeButton3" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm3" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="minStopTime" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Thời gian dừng tối đa tại sân bay trung gian</th>
+      <td>{{regulation.maxStopTime}} (phút)</td>
+      <td>
+        <button id="changeButton4" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm4" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="maxStopTime" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Thời gian chậm nhất khi đặt vé</th>
+      <td>{{regulation.minBookingTime}} (giờ)</td>
+      <td>
+        <button id="changeButton5" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm5" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="minBookingTime" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Thời gian chậm nhất khi hủy đặt vé</th>
+      <td>{{regulation.minDeleteMyFlightTime}} (giờ)</td>
+      <td>
+        <button id="changeButton6" type="button" class="btn btn-primary">Thay đổi</button>
+        <form action="" method="POST" id="changeForm6" class="form-inline" style="display: none">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input name="minDeleteMyFlightTime" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="deleteFlightAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+  <strong>Thông báo!</strong> Không thể xóa chuyến bay này
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{{#if error}}
+  <div id="deleteFlightAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Lỗi!</strong> {{error}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{{/if}}
+
+<script>
+  document.querySelectorAll('button[id^="changeButton"]').forEach((button, index) => {
+    var changeForm = document.getElementById(`changeForm${index + 1}`)
+    button.addEventListener("click", function() {
+        button.style.display = "none";
+        changeForm.style.display = "flex"; 
+    });
+  })
+</script>

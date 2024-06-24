@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">Admin Login</div>
+  </div>
+  <div class="form-container">
+    <div class="form-inner">
+      <form action="" method="POST" class="login">
+        <div class="field">
+          <input name="email" ltype="text" placeholder="Email" value="{{data.email}}" required>
+        </div>
+        <div class="field">
+          <input name="password" type="password" placeholder="Mật khẩu" value="{{data.password}}" required>
+        </div>
+        {{#if error}}
+          <div class="error-message" style="color: red;">{{error}}</div>
+        {{/if}}
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Đăng nhập">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

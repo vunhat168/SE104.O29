@@ -1,0 +1,68 @@
+<section class="container">
+    <header>Đặt vé</header>
+    <form action="/booking/ticket?ID={{flight._id}}" method="POST" class="form">
+        <div class="column">
+            <div class="input-box">
+            <label>Mã chuyến bay</label>
+            <input type="text" value="{{flight.flightId}}" disabled />
+            </div>
+            <div class="input-box">
+            <label>Hành khách</label>
+            <input type="text" name="passenger" value="{{data.passenger}}" required />
+            </div>
+        </div>
+        
+        <div class="column">
+            <div class="input-box">
+            <label>CMND</label>
+            <input type="text" name="CMND" value="{{data.CMND}}" required />
+            </div>
+            <div class="input-box">
+            <label>Số điện thoại</label>
+            <input type="text" name="phoneNumber" value="{{data.phoneNumber}}" required />
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box" style="width: 250px">
+                <label>Hạng vé</label>
+                <div class="select-box">
+                    <select id="ticketRank" name="ticketRank">
+                        <option {{#if (isSelect ../data.ticketRank '2')}}selected{{/if}}>2</option>
+                        <option {{#if (isSelect ../data.ticketRank '1')}}selected{{/if}}>1</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box">
+            <label>Giá tiền</label>
+            <input id="price" type="text" value="{{flight.price}}" disabled/>
+            </div>
+        </div>
+
+        {{#if error}}
+          <div class="error-message" style="color: red;">{{error}}</div>
+        {{/if}}
+        
+        <button>Đặt vé</button>
+    </form>
+</section>
+
+<script>
+    const price = {{flight.price}}; 
+    const ticketRankSelect = document.getElementById('ticketRank');
+    const priceDisplay = document.getElementById('price');
+
+    ticketRankSelect.addEventListener('change', function() {
+        const selectedRank = this.value;
+        let displayedPrice;
+
+        if (selectedRank === '1') {
+            priceDisplay.value = Math.floor(price * 1.05);
+        } else if (selectedRank === '2') {
+            priceDisplay.value = price ; 
+        } else {
+            priceDisplay.value = '';
+        }
+    });
+</script>

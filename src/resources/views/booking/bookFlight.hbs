@@ -1,0 +1,68 @@
+<section class="my-container">
+  <header>Tìm kiếm chuyến bay</header>
+  <form action="" method="POST" class="form">
+      <div class="input-box address">
+          <div class="column">
+          <div class="select-box">
+              <select name="startAirport" required>
+                  <option hidden value="">Sân bay đi</option>
+                  {{#each airports}}
+                  <option>{{this.name}}</option>
+                  {{/each}}
+              </select>
+          </div>
+
+          <div class="select-box">
+              <select name="endAirport" required>
+                  <option hidden value="">Sân bay đến</option>
+                  {{#each airports}}
+                  <option>{{this.name}}</option>
+                  {{/each}}
+              </select>
+          </div>
+
+          <div class="input-box mt-0">
+              <input id="dateInput" type="date" name="date" min="" required value="{{data.date}}" />
+          </div>
+          </div>
+      </div>
+      <button>Tìm kiếm</button>
+  </form>
+</section>
+
+{{#if flights}}
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Mã chuyến bay</th>
+      <th scope="col">Sân bay đi</th>
+      <th scope="col">Sân bay đến</th>
+      <th scope="col">Ngày</th>
+      <th scope="col">Giờ</th>
+      <th scope="col">Giá vé</th>
+      <th scope="col"></th>
+  </thead>
+  <tbody>
+    {{#each flights}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.flightId}}</td>
+      <td>{{this.startAirport}}</td>
+      <td>{{this.endAirport}}</td>
+      <td>{{this.date}}</td>
+      <td>{{this.time}}</td>
+      <td>{{this.price}}</td>
+      <td><a href="/booking/ticket?ID={{this._id}}">Đặt vé</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('dateInput').setAttribute('min', today);
+    });
+</script>

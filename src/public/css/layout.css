@@ -1,0 +1,339 @@
+body {
+  background-image: url('../image/background.jpg');
+  background-size: cover;
+}
+
+.nav-item.ml-auto {
+  margin-left: auto;
+}
+
+.nav-icon {
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 18px
+}
+
+#mu-reservation {
+  background-color: #222;
+  display: inline;
+  float: left;
+  padding: 100px 0;
+  width: 100%;
+}
+
+.mu-reservation-area {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
+.mu-reservation-area .mu-title h2 {
+  color: #fff;
+}
+
+.mu-reservation-content {
+  display: inline;
+  float: left;
+  margin-top: 20px;
+  padding: 0 100px;
+  width: 100%;
+}
+
+.mu-reservation-content h3 {
+  color: #fff;
+  display: inline-block;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.mu-reservation-content p {
+  color: #fff;
+  letter-spacing: 0.5px;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.mu-reservation-left {
+  display: inline;
+  float: left;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.mu-reservation-form .form-control {
+  margin-bottom: 20px;
+}
+
+.mu-reservation-form input[type="text"],
+.mu-reservation-form input[type="email"] {
+  border-radius: 0;
+  color: #000;
+  height: 40px;
+}
+
+.mu-reservation-form input[type="text"]:focus,
+.mu-reservation-form input[type="email"]:focus {
+  box-shadow: none;
+}
+
+.mu-reservation-form input[type="text"]::-webkit-input-placeholder,
+.mu-reservation-form input[type="email"]::-webkit-input-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form input[type="text"]:-moz-placeholder,
+.mu-reservation-form input[type="email"]:-moz-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form input[type="text"]::-moz-placeholder,
+.mu-reservation-form input[type="email"]::-moz-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form input[type="text"]:-ms-input-placeholder,
+.mu-reservation-form input[type="email"]:-ms-input-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form select {
+  border-radius: 0;
+  height: 40px;
+}
+
+.mu-reservation-form select:focus {
+  box-shadow: none;
+}
+
+.mu-reservation-form select option {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.mu-reservation-form textarea {
+  border-radius: 0;
+  color: #000;
+  padding: 10px;
+}
+
+.mu-reservation-form textarea:focus {
+  box-shadow: none;
+}
+
+.mu-reservation-form textarea::-webkit-input-placeholder {
+  color: #555;
+}
+
+ .mu-reservation-form textarea:-moz-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form textarea::-moz-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form textarea:-ms-input-placeholder {
+  color: #555;
+}
+
+.mu-reservation-form button[type="submit"] {
+  border: none;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.datepicker {
+  border-radius: 0;
+  padding: 6px 10px;
+}
+
+.datepicker .datepicker-switch, 
+.datepicker .prev, 
+.datepicker .next, 
+.datepicker tfoot tr th {
+  font-size: 20px;
+}
+
+.table-condensed > thead > tr > th, 
+.table-condensed > tbody > tr > th, 
+.table-condensed > tfoot > tr > th, 
+.table-condensed > thead > tr > td, 
+.table-condensed > tbody > tr > td, 
+.table-condensed > tfoot > tr > td {
+  padding: 6px;
+}
+
+.datepicker table tr td.day:hover {
+  color: #fff;
+}
+
+.mu-reservation-right {
+  background-color: #fff;
+  display: inline;
+  float: left;
+  margin-top: 40px;
+  width: 100%;
+  padding: 10px;
+}
+
+.mu-opening-hour {
+  display: inline;
+  float: left;
+  width: 100%;
+  padding: 10px;
+}
+
+.mu-opening-hour h2 {
+  font-family: "Tangerine", cursive;
+  font-size: 50px;
+  margin: 10px 15px 20px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.mu-opening-hour ul li {
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.mu-opening-hour ul p{
+  color: #000;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mu-readmore-btn {
+  background-color: #fff;
+  font-family: "Open Sans", sans-serif;
+  display: inline-block;
+  font-size: 16px;
+  padding: 15px 35px;
+  position: relative;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.table {
+  background-color: #f8f9fa;
+}
+
+.dropdown-menu {
+  /* Adjust left positioning if needed */
+  left: 0 !important;  /* Override Bootstrap default */
+}
+
+.my-container {
+  margin-top: 20px;
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.my-container .form {
+  margin-top: 30px;
+}
+
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form :where(.input-box textarea, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.input-box textarea {
+  resize: none;
+}
+.input-box textarea:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(130, 106, 251);
+}
+.form button:hover {
+  background: rgb(88, 56, 250);
+}
+
+.hero-section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 95vh;
+  padding: 0 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-section .hero {
+  max-width: 50%;
+  color: #2e4a95;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,145 @@
+<section class="my-container">
+  <header>Báo cáo doanh thu</header>
+  <form action="" method="POST" class="form">
+    <div class="input-box address">
+      <div class="column">
+        <div class="select-box">
+            <select id="reportTypeBox"name="reportType" required>
+                <option hidden value="">Chọn loại báo cáo</option>
+                <option value="month">Báo cáo tháng</option>
+                <option value="year">Báo cáo năm</option>
+            </select>
+        </div>
+
+        <div id="monthBox" class="input-box mt-0" style="display: none">
+          <input id="month" type="month" name="month"/>
+        </div>
+        
+        <div id="yearBox" class="select-box" style="display: none">
+          <select name="year">
+              <option hidden value="">Chọn năm</option>
+              <!-- Sử dụng JavaScript để tạo các option cho năm -->
+              <script>
+                  const selectYear = document.querySelector('select[name="year"]');
+                  const currentYear = new Date().getFullYear();
+                  const minYear = 1900; // Năm tối thiểu
+                  const maxYear = currentYear; // Năm hiện tại
+
+                  for (let year = maxYear; year >= minYear; year--) {
+                      const option = document.createElement('option');
+                      option.value = year;
+                      option.textContent = year;
+                      selectYear.appendChild(option);
+                  }
+              </script>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button type="submit">Lập báo cáo</button>
+  </form>
+</section>
+
+{{#if (isSelect reportType 'month')}}
+  {{#if flights}}
+    <table class="table mt-3">
+      <thead class="thead-dark">
+        <tr>
+            <th colspan="5" class="text-center">BÁO CÁO DOANH THU BÁN VÉ CÁC CHUYẾN BAY</th>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">THÁNG: {{month}}</td>
+        </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Chuyến bay</th>
+          <th scope="col">Số vé</th>
+          <th scope="col">Doanh thu(đồng)</th>
+          <th scope="col">Tỉ lệ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each flights}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.flightId}}</td>
+          <td>{{this.ticket}}</td>
+          <td>{{this.income}}</td>
+          <td>{{this.percent}} %</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <div id="deleteFlightAlert" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      <strong>Không có chuyến bay trong tháng này!</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {{/if}}
+{{/if}}
+
+{{#if (isSelect reportType 'year')}}
+  {{#if flightByMonth}}
+    <table class="table mt-3">
+      <thead class="thead-dark">
+        <tr>
+            <th colspan="5" class="text-center">BÁO CÁO DOANH THU NĂM</th>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">THÁNG: {{year}}</td>
+        </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tháng</th>
+          <th scope="col">Số chuyến bay</th>
+          <th scope="col">Doanh thu(đồng)</th>
+          <th scope="col">Tỉ lệ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each flightByMonth}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.month}}</td>
+          <td>{{this.flightCount}}</td>
+          <td>{{this.income}}</td>
+          <td>{{this.percent}} %</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <div id="deleteFlightAlert" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      <strong>Không có chuyến bay trong năm này!</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>  
+  {{/if}}
+{{/if}}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var reportTypeSelect = document.getElementById('reportTypeBox');
+    var monthInputBox = document.getElementById('monthBox');
+    var yearSelectBox = document.getElementById('yearBox');
+
+    reportTypeSelect.addEventListener('change', function() {
+      console.log(this.value)
+      if (this.value === 'month') {
+        monthInputBox.removeAttribute('style');
+        monthInputBox.querySelector('input').setAttribute('required', '');
+        yearSelectBox.style = "display: none";
+        yearSelectBox.removeAttribute('required')
+      } 
+      else if (this.value === 'year') {
+        yearSelectBox.removeAttribute('style');
+        yearSelectBox.querySelector('select').setAttribute('required', '');
+        monthInputBox.style = "display: none";
+        monthInputBox.removeAttribute('required')
+      }
+    });
+  })
+</script>

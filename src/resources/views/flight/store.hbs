@@ -1,0 +1,93 @@
+<h1 class="mt-3">
+  Danh sách chuyến bay
+</h1>
+<a href="./create" class="btn btn-primary active" role="button" aria-pressed="true">Thêm chuyến bay</a>
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Mã chuyến bay</th>
+      <th scope="col" width="120px">Sân bay đi</th>
+      <th scope="col" width="120px">Sân bay đến</th>
+      <th scope="col" width="120px">Ngày</th>
+      <th scope="col">Giờ</th>
+      <th scope="col">Thời gian bay</th>
+      <th scope="col">Số ghế trống</th>
+      <th scope="col">Số ghế đặt</th>
+      <th width="140px"></th>
+      <th width="140px"></th>
+  </thead>
+  <tbody>
+    {{#each flights}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.flightId}}</td>
+      <td>{{this.startAirport}}</td>
+      <td>{{this.endAirport}}</td>
+      <td>{{this.date}}</td>
+      <td>{{this.time}}</td>
+      <td>{{this.flyTime}}</td>
+      <td>{{sum this.emptyFirstSeat this.emptySecondSeat}}</td>
+      <td>{{bookSeat this}}</td>
+      <td><a href="/flight/update/{{this.flightId}}">Sửa chuyến bay</a></td>
+      <td><a href="" data-toggle="modal" data-target="#deleteFlight" data-flightid="{{this.flightId}}">Xóa chuyến bay</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{!-- Delete confirm --}}
+<div class="modal fade" id="deleteFlight" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có xác nhận xoá chuyến bay
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button id="btn-delete" type="button" class="btn btn-primary">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="deleteForm" method="POST" ></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var flightId;
+    var deleteForm = document.getElementById('deleteForm')
+
+     $('#deleteFlight').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      flightId = button.data('flightid')
+    })
+
+    var deleteButton = document.getElementById('btn-delete')
+    deleteButton.onclick = function() {
+      deleteForm.action = '/flight/delete/' + flightId + '?_method=DELETE';
+      deleteForm.submit();
+    }
+  })
+</script>
+
+{{!-- Cant delete flight alert --}}
+<div id="deleteFlightAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+  <strong>Thông báo!</strong> Không thể xóa chuyến bay này
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{{#if flightIsBook}}
+<script>
+  var alert = document.getElementById('deleteFlightAlert');
+  alert.removeAttribute('style');
+</script>
+{{/if}}
